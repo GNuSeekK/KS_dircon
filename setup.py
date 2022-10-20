@@ -1,11 +1,10 @@
 from setuptools import setup
 
 install_requires = [
-    'Keesung-logging==v0.0.8',
+    'Keesung_logging @ git+https://github.com/GNuSeekK/Keesung_logging@v0.0.8#egg=Keesung_logging',
     ]
-
-dependency_links = [
-    'git+https://github.com/GNuSeekK/Keesung_logging.git@v0.0.8',
+setup_requires=[
+    'Kessung_logging>=0.0.8'
     ]
 
 setup(
@@ -18,5 +17,5 @@ setup(
     license='keesung',
     packages=['KS_dircon'],
     install_requires=install_requires,
-    dependency_links=dependency_links
+    setup_requires=setup_requires
 )

@@ -95,6 +95,10 @@ class Dir_Controller(Keesung_logging.my_logger):
                               compress_type=zipfile.ZIP_DEFLATED)
             self.info(f'{zipname} 압축 종료')
             
+    def file_name_extract(text):
+        text = os.path.splitext(os.path.split(text)[-1])[0]
+        return text
+    
     def img_json_matching(self, img_list: list, json_list: list):
         """_summary_
 
@@ -117,8 +121,11 @@ class Dir_Controller(Keesung_logging.my_logger):
             else:
                 self.error(f'{json_path}와 매칭되는 image파일이 없습니다')
 
+        pop_list = []
         for key, value in all_dict.items():
             if len(value) != 2:
-                all_dict.pop(key, None)
+                pop_list.append(key)
                 self.error(f'{value[0]}와 매칭되는 json파일이 없습니다')
+        for tmp in pop_list:
+            all_dict.pop(tmp, None)
         return all_dict

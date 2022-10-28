@@ -111,11 +111,11 @@ class Dir_Controller(Keesung_logging.my_logger):
         """        
         all_dict = {}
         for img_path in img_list:
-            file_name = os.path.splitext(os.path.split(img_path)[-1])[0]
+            file_name = self.file_name_extract(img_path)
             all_dict[file_name] = [img_path]
 
         for json_path in json_list:
-            file_name = os.path.splitext(os.path.split(json_path)[-1])[0]
+            file_name = self.file_name_extract(json_path)
             if file_name in all_dict:
                 all_dict[file_name].append(json_path)
             else:

@@ -95,7 +95,7 @@ class Dir_Controller(Keesung_logging.my_logger):
                               compress_type=zipfile.ZIP_DEFLATED)
             self.info(f'{zipname} 압축 종료')
             
-    def file_name_extract(text):
+    def file_name_extract(self, text):
         text = os.path.splitext(os.path.split(text)[-1])[0]
         return text
     

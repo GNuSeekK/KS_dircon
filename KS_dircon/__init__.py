@@ -2,7 +2,7 @@
 """
 Created on Wed Aug 24 10:56:56 2022
 v0.0.1 - 모듈 배포
-
+v0.0.4 - file_matching 추가
 @author: 이기성
 
 class
@@ -16,6 +16,8 @@ create_directory
 import os
 import Keesung_logging
 import zipfile
+
+__version__ = 'v0.0.4'
 
 def create_directory(directory: str, bool_file: bool=True):
     """_summary_
@@ -126,6 +128,37 @@ class Dir_Controller(Keesung_logging.my_logger):
             if len(value) != 2:
                 pop_list.append(key)
                 self.error(f'{value[0]}와 매칭되는 json파일이 없습니다')
+        for tmp in pop_list:
+            all_dict.pop(tmp, None)
+        return all_dict
+    
+    def file_matching(self, list_of_file_list: list, naming_list: list):
+        """_summary_
+
+        Args:
+            list_of_file_list (list): [List, List, ...]
+            naming_list (list): [str, str, ...]
+
+        Returns:
+            dictionary : {
+                'naming_list[0]' : list_of_file_list[0],
+                'naming_list[1]' : list_of_file_list[1],
+            }
+        """        
+        all_dict = {}
+        
+        for name, data in zip(naming_list, list_of_file_list):
+            for file_path in data:
+                file_name = self.file_name_extract(file_path)
+                if file_name not in all_dict:
+                    all_dict[file_name] = {}
+                all_dict[file_name][name] = file_path
+                
+        pop_list = []
+        for key, value in all_dict.items():
+            if len(value.keys()) != len(naming_list):
+                pop_list.append(key)
+                self.error(f'{key} 파일과 매칭되는 파일이 {len(naming_list) - len(value.keys())}개 부족합니다.')
         for tmp in pop_list:
             all_dict.pop(tmp, None)
         return all_dict

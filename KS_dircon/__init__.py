@@ -3,6 +3,7 @@
 Created on Wed Aug 24 10:56:56 2022
 v0.0.1 - 모듈 배포
 v0.0.4 - file_matching 추가
+v0.0.5 - file_matching 에 dict값 사용 가능
 @author: 이기성
 
 class
@@ -16,6 +17,8 @@ create_directory
 import os
 import Keesung_logging
 import zipfile
+from typing import List
+
 
 __version__ = 'v0.0.4'
 
@@ -136,7 +139,7 @@ class Dir_Controller(Keesung_logging.my_logger):
         """_summary_
 
         Args:
-            list_of_file_list (list): [List, List, ...]
+            list_of_file_list (list): [List, List, ...] or [Dict, Dict, ...]
             naming_list (list): [str, str, ...]
 
         Returns:
@@ -148,11 +151,17 @@ class Dir_Controller(Keesung_logging.my_logger):
         all_dict = {}
         
         for name, data in zip(naming_list, list_of_file_list):
-            for file_path in data:
-                file_name = self.file_name_extract(file_path)
-                if file_name not in all_dict:
-                    all_dict[file_name] = {}
-                all_dict[file_name][name] = file_path
+            if type(data) == dict:
+                for file_name, file_path in data.items():
+                    if file_name not in all_dict:
+                        all_dict[file_name] = {}
+                    all_dict[file_name][name] = file_path
+            else:
+                for file_path in data:
+                    file_name = self.file_name_extract(file_path)
+                    if file_name not in all_dict:
+                        all_dict[file_name] = {}
+                    all_dict[file_name][name] = file_path
                 
         pop_list = []
         for key, value in all_dict.items():

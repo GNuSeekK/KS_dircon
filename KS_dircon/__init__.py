@@ -20,7 +20,7 @@ import zipfile
 from typing import List
 
 
-__version__ = 'v0.0.4'
+__version__ = 'v0.0.5'
 
 def create_directory(directory: str, bool_file: bool=True):
     """_summary_

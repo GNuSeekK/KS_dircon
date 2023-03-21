@@ -4,6 +4,7 @@ Created on Wed Aug 24 10:56:56 2022
 v0.0.1 - 모듈 배포
 v0.0.4 - file_matching 추가
 v0.0.5 - file_matching 에 dict값 사용 가능
+v0.0.6 - pip 에러로 인한 버전 업데이트
 @author: 이기성
 
 class
@@ -20,7 +21,7 @@ import zipfile
 from typing import List
 
 
-__version__ = 'v0.0.5'
+__version__ = 'v0.0.6'
 
 def create_directory(directory: str, bool_file: bool=True):
     """_summary_

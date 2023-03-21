@@ -6,7 +6,7 @@ install_requires = [
 
 setup(
     name = 'KS_dircon',
-    version='0.0.5',
+    version='0.0.6',
     description='Custom KS_dircon',
     url='https://github.com/GNuSeekK/KS_dircon.git',
     author='Keesung',
